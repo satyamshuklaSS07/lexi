@@ -1,27 +1,30 @@
 # 📖 Lexi – Dictionary & Word Lookup App
 
-A modern and interactive dictionary web app that lets users search English words and instantly explore their meanings, pronunciation, examples, and synonyms.
+Lexi is a simple and interactive Dictionary & Word Lookup App that lets users search for English words and instantly get their meanings, phonetics, examples, synonyms, and pronunciation.
 
-🔗 **Live Demo:** https://lexi-dbcc.vercel.app/
+🔗 Live Demo: https://lexi-dbcc.vercel.app/
 
-💻 **GitHub Repository:** https://github.com/satyamshuklaSS07/lexi
+💻 GitHub: https://github.com/satyamshuklaSS07/lexi
 
 ---
 
 ## ✨ Features
 
-- 🔎 Search any English word
-- 📚 Multiple meanings and definitions
+- 🔎 Search for any English word
+- ⚡ Real-time word lookup using an API
+- 📚 Multiple meanings for a word
 - 🏷️ Meanings grouped by part of speech
-- 🔤 Phonetic pronunciation
+- 🔢 Multiple definitions for each meaning
 - 🔊 Pronunciation audio when available
+- 🗣️ Phonetic pronunciation
 - 💬 Example sentences
-- 🔄 Synonyms when available
-- ⚡ Fast API-based search
-- ⌨️ Debounced live search
-- ❌ User-friendly error handling
+- 🔗 Synonyms when available
+- ❌ Error handling for words that are not found
+- ⏳ Loading state while fetching data
 - 📱 Fully responsive design
-- 🎨 Modern animated 3D/glass-style UI
+- 🌙 Modern dark UI
+- ✨ Animated 3D and glassmorphism effects
+- 🚀 Deployed on Vercel
 
 ---
 
@@ -36,24 +39,98 @@ A modern and interactive dictionary web app that lets users search English words
 
 ---
 
-## 🔌 API Used
+## 🌐 API Used
 
-This project uses the **Free Dictionary API** to fetch real-time dictionary information.
+This project uses the Free Dictionary API to get information about searched words.
 
 ### API Endpoint
 
-```text
-https://api.dictionaryapi.dev/api/v2/entries/en/{word}
- ⚙️ How It Works
-1. Enter an English word in the search box.
-2. Lexi sends a request to the Free Dictionary API.
-3. The API returns the word information in JSON format.
-4. JavaScript processes the API response.
-5. Definitions and meanings are displayed according to their part of speech.
-6. Phonetics, examples and synonyms are shown when available.
-7. If pronunciation audio is available, users can play it.
-8. If the word is not found, a user-friendly error message is displayed.
-📂 Project Structure
+https://api.dictionaryapi.dev/api/v2/entries/en/
+
+### Example
+
+https://api.dictionaryapi.dev/api/v2/entries/en/hello
+
+The API provides:
+
+- Word
+- Phonetics
+- Audio pronunciation
+- Parts of speech
+- Definitions
+- Examples
+- Synonyms
+
+---
+
+## ⚙️ How It Works
+
+1. The user enters a word in the search box.
+2. JavaScript gets the entered word.
+3. The Fetch API sends a request to the Free Dictionary API.
+4. The API returns the word information.
+5. JavaScript processes the response.
+6. Lexi displays the meanings, definitions, examples, phonetics, synonyms, and pronunciation.
+7. If the word is not found, an error message is displayed.
+
+---
+
+## 🔍 Search Functionality
+
+Lexi supports:
+
+- Search using the search button
+- Live search while typing
+- Debounced API requests
+
+The live search waits for the user to stop typing before sending the API request. This helps reduce unnecessary API calls.
+
+---
+
+## 📚 Multiple Meanings
+
+A word can have different meanings depending on its part of speech.
+
+For example:
+
+- Noun
+- Verb
+- Adjective
+- Adverb
+
+Lexi displays each part of speech separately and shows all available definitions under it.
+
+---
+
+## 🔊 Pronunciation
+
+If the Dictionary API provides an audio pronunciation URL, Lexi displays a pronunciation button.
+
+When the user clicks the button, JavaScript plays the pronunciation.
+
+Example:
+
+const audio = new Audio(audioUrl);
+audio.play();
+
+---
+
+## ❌ Error Handling
+
+If a word does not exist or the API request fails, Lexi displays a user-friendly error message.
+
+Example:
+
+"word" wasn't found.
+
+Check the spelling and try another word.
+
+This prevents the application from breaking when an invalid word is entered.
+
+---
+
+## 📁 Project Structure
+
 lexi/
 │
 ├── index.html
@@ -61,91 +138,239 @@ lexi/
 ├── script.js
 └── README.md
 
-🚀 Run Locally
-1. Clone the repository
+### index.html
+
+Contains the main structure of the application.
+
+### style.css
+
+Contains:
+
+- Layout
+- Responsive design
+- Animations
+- Glassmorphism effects
+- Buttons
+- Cards
+- Typography
+
+### script.js
+
+Contains:
+
+- Search functionality
+- Fetch API request
+- API response handling
+- Dynamic result rendering
+- Audio pronunciation
+- Error handling
+- Live search
+
+### README.md
+
+Contains project documentation and information.
+
+---
+
+## 🚀 Run the Project Locally
+
+### 1. Clone the repository
+
 git clone https://github.com/satyamshuklaSS07/lexi.git
 
-2. Open the project folder
+### 2. Open the project
+
 cd lexi
 
-3. Run the project
-Open index.html in your browser.
-An internet connection is required for fetching live dictionary data from the API.
+### 3. Open the project
 
-🎯 Main Functionalities
-🔎 Word Search
-Users can search for any English word using the search box.
-📚 Multiple Definitions
-The application displays all available definitions returned by the API.
-🏷️ Part of Speech
-Definitions are grouped according to categories such as:
-- Noun
-- Verb
-- Adjective
-- Adverb
-- Pronoun
-- Preposition
-🔊 Pronunciation
-If the API provides an audio URL, users can click the audio button to hear the pronunciation.
-💬 Examples
-Example sentences are displayed when they are available in the API response.
-🔄 Synonyms
-Synonyms are displayed when provided by the API.
-❌ Error Handling
-If a word is not found or the API request fails, the application displays a clear error message.
-📱 Responsive Design
-Lexi is designed to work smoothly across different screen sizes:
+Open index.html directly in your browser.
+
+You can also use the Live Server extension in VS Code.
+
+---
+
+## 💻 Fetch API
+
+Lexi uses JavaScript's Fetch API to communicate with the Dictionary API.
+
+Example:
+
+fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word);
+
+The response is converted into JSON:
+
+const data = await response.json();
+
+The application then extracts the required information and displays it on the webpage.
+
+---
+
+## 🧠 JavaScript Concepts Used
+
+This project helped me practice:
+
+- DOM Manipulation
+- Event Listeners
+- Async/Await
+- Fetch API
+- Promises
+- JSON
+- Error Handling
+- Array Methods
+- Template Literals
+- Dynamic HTML Rendering
+- Debouncing
+- Audio API
+
+---
+
+## 🎨 UI & Design
+
+Lexi uses a modern interface with:
+
+- Glassmorphism cards
+- 3D-style visual effects
+- Smooth animations
+- Responsive layout
+- Interactive buttons
+- Clean typography
+- Dark theme
+
+The design is optimized for desktop, laptop, tablet, and mobile screens.
+
+---
+
+## 📱 Responsive Design
+
+The application works on:
+
 - 💻 Desktop
 - 💻 Laptop
 - 📱 Mobile
-- 📟 Tablet
-🎨 UI & Design
-The project includes:
-- Dark modern interface
-- Glassmorphism cards
-- Animated background
-- Gradient text
-- 3D-style effects
-- Smooth transitions
-- Hover animations
-- Responsive layout
-🧠 What I Learned
-While building this project, I practiced:
-- HTML5
-- CSS3
-- JavaScript
-- REST API integration
-- Fetch API
-- JSON data handling
-- Async/Await
-- DOM manipulation
-- Error handling
-- Audio playback
-- Responsive web design
-- Git & GitHub
-- Vercel deployment
-💡 Interview Questions
-1. How would you display multiple meanings for one word?
-I would loop through the meanings array returned by the API and display each part of speech with all the available definitions.
-2. How would you handle a word that isn't found?
-I would check the API response status. If the request fails or the word does not exist, I would display a user-friendly error message asking the user to check the spelling or try another word.
-3. How would you play an audio pronunciation from a URL?
-I would take the audio URL returned by the API and use JavaScript's Audio object or an HTML <audio> element to play the pronunciation when the user clicks the audio button.
-4. How does the Fetch API work in this project?
-The Fetch API sends an HTTP request to the Free Dictionary API. The response is converted into JSON using response.json(). JavaScript then processes the returned data and dynamically displays the required information on the webpage.
-🌐 Project Links
-🔗 Live Demo
+- 📱 Tablet
+
+The layout automatically adjusts according to the screen size.
+
+---
+
+# 🎯 Interview Questions
+
+## 1. How would you display multiple meanings for one word?
+
+I would loop through the meanings array returned by the API. Each meaning contains a partOfSpeech and a list of definitions. I can display each part of speech separately and then loop through its definitions.
+
+Example:
+
+data.meanings.map(meaning => {
+    console.log(meaning.partOfSpeech);
+    console.log(meaning.definitions);
+});
+
+---
+
+## 2. How would you handle a word that isn't found?
+
+I would check the HTTP response using response.ok. If the response is not successful, I would throw an error and show a user-friendly message.
+
+Example:
+
+if (!response.ok) {
+    throw new Error("Word not found");
+}
+
+Then I can handle the error using catch() or try...catch.
+
+---
+
+## 3. How would you play an audio pronunciation from a URL?
+
+If the API provides an audio URL, I can create an Audio object in JavaScript and call the play() method.
+
+Example:
+
+const audio = new Audio(audioUrl);
+audio.play();
+
+This allows the user to listen to the pronunciation.
+
+---
+
+## 4. How does the Fetch API work in this project?
+
+The Fetch API sends an HTTP request to the Dictionary API. The API returns JSON data containing information about the searched word.
+
+Example:
+
+const response = await fetch(apiUrl);
+const data = await response.json();
+
+The JavaScript code then uses this data to update the webpage dynamically.
+
+---
+
+## 📈 Future Improvements
+
+Some features that can be added in the future:
+
+- 🔐 User accounts
+- ❤️ Save favorite words
+- 📜 Search history
+- 🌓 Light/Dark theme switcher
+- 🌍 More language support
+- 📊 Word learning statistics
+- 📱 PWA support
+- 🗂️ Personal vocabulary list
+
+---
+
+## ✅ Learning Outcomes
+
+While building Lexi, I learned how to:
+
+- Work with REST APIs
+- Use the Fetch API
+- Handle asynchronous JavaScript
+- Work with JSON data
+- Dynamically update HTML
+- Handle API errors
+- Add audio functionality
+- Create responsive layouts
+- Build a real-world frontend project
+
+---
+
+## 🌐 Project Links
+
+### Live Website
+
 https://lexi-dbcc.vercel.app/
-💻 GitHub Repository
+
+### GitHub Repository
+
 https://github.com/satyamshuklaSS07/lexi
-📌 Project Information
-Project Name: Lexi – Dictionary & Word Lookup App
-Developer: Satyam Shukla
-Type: Web Development Project
-Frontend: HTML5, CSS3, JavaScript
-API: Free Dictionary API
-Deployment: Vercel
-👨‍💻 Developer
+
+### Deployment
+
+Vercel
+
+---
+
+## 👨‍💻 Developer
+
 Satyam Shukla
-Built as a web development project to practice frontend development, API integration, JavaScript and responsive UI design.
-⭐ If you like this project, feel free to explore the repository and try the live demo.
+
+BCA / MCA Student  
+Frontend & Full Stack Development Enthusiast
+
+GitHub:
+
+https://github.com/satyamshuklaSS07
+
+---
+
+## ⭐ Project
+
+If you like this project, feel free to explore the repository and try the live application.
+
+Built with HTML, CSS, JavaScript, and Fetch API.
